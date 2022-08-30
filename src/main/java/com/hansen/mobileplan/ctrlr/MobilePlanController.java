@@ -72,15 +72,26 @@ public class MobilePlanController {
 	
 
 	@RequestMapping(method = RequestMethod.PATCH) // OR PUT
-	public ResponseEntity<Object> update(@RequestBody MobilePlan tobemerged) {
+	public ResponseEntity<String> update(@RequestBody MobilePlan tobemerged) {
 		logger.info("Inside update method");
-		ResponseEntity<Object> planResponse = null;
+		ResponseEntity<String> planResponse = null;
 		
 		//TODO Homework... write the code to update
 		
-		
-		return planResponse;	
+		Object mobilePlanList = mpSrvc.update(tobemerged);
+				
+		if(mobilePlanList!= null) {
+			planResponse = new ResponseEntity<String>(" Updated mobileplan list", null, HttpStatus.CREATED);
+			
+			return planResponse;
+		}
+		else {
+			planResponse = new ResponseEntity<String>(" Not found", null, HttpStatus.NOT_FOUND);
+			
+			return planResponse;
+		}	
 	}
+		
 
 	@RequestMapping(value = "{planid}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@PathVariable(value = "planid") Long planid) {
