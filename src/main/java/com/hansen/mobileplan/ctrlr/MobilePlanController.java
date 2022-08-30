@@ -27,19 +27,19 @@ public class MobilePlanController {
 	MobilePlanDao mobilePlanDao;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Object> create(@RequestBody MobilePlan inputentity) {
+	public ResponseEntity<String> create(@RequestBody MobilePlan inputentity) {
 		logger.info("Inside add method");
-		ResponseEntity<Object> mpResponse;
+		ResponseEntity<String> mpResponse;
 		Object mobilePlan = mpSrvc.create(inputentity);
 		if (mobilePlan != null) {
-			mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.CREATED);
+			mpResponse = new ResponseEntity<String>("MobilePlan Created", null, HttpStatus.CREATED);
 			return mpResponse;
 		} else {
-			mpResponse = new ResponseEntity<Object>(null, null, HttpStatus.NOT_ACCEPTABLE);
+			mpResponse = new ResponseEntity<String>("MobilePlan alraedy Present for this id", null, HttpStatus.NOT_ACCEPTABLE);
 			return mpResponse;
 		}
 	}
-
+	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public ResponseEntity<Object> read(@PathVariable(value = "id") Long id) {
 		logger.info("Inside search method");
@@ -103,7 +103,7 @@ public class MobilePlanController {
 			return planResponse;
 		}
 		else {
-			planResponse = new ResponseEntity<String>(" Not found", null, HttpStatus.NOT_FOUND);
+			planResponse = new ResponseEntity<String>("id Not Present for update", null, HttpStatus.NOT_FOUND);
 			
 			return planResponse;
 		}	
@@ -121,7 +121,7 @@ public class MobilePlanController {
 			bookResponse = new ResponseEntity<Object>("mobile plan deleted", null , HttpStatus.CREATED);
 		}
 		else{
-			bookResponse = new ResponseEntity<Object>("mobile plan not deleted", null, HttpStatus.NOT_ACCEPTABLE);
+			bookResponse = new ResponseEntity<Object>("id not present for delete", null, HttpStatus.NOT_ACCEPTABLE);
 		}
 		
 		return bookResponse;

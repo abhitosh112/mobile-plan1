@@ -15,12 +15,20 @@ public class MobilePlanSrvc {
 	MobilePlanDao mobilePlanDao;
 
 	public Object create(MobilePlan entity) {
-
+        
+		long id=entity.getId();
+		Optional<MobilePlan>person=mobilePlanDao.findById(id);
+		if(person.isPresent())
+		{
+			return null;
+		}
+		else
+		{
 		MobilePlan mobilePlan = mobilePlanDao.save(entity);
 		return mobilePlan;
+		}
 
 	}
-
 	public Object read(Long id) {
 		Optional<MobilePlan> person = mobilePlanDao.findById(id);
 		if (person.isPresent()) {
