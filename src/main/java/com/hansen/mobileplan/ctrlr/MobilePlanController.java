@@ -59,15 +59,28 @@ public class MobilePlanController {
 	
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<Iterable<MobilePlan>> readAll() {
-		logger.info("Inside readAll method");
-		ResponseEntity<Iterable<MobilePlan>> mpResponse = null;
+	
+	public ResponseEntity<Object> readAll() {
+        logger.info("Inside readAll method");
+        ResponseEntity<Object> mpResponse = null;
 
-		//TODO Homework... write the code to readall
-		
-		
-		return mpResponse;
-	}
+       
+        Iterable<MobilePlan> mobilePlanList=mpSrvc.readAll();
+        
+        if(mobilePlanList!=null)
+        {
+            mpResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
+            
+            return mpResponse;
+        }
+        else
+        {
+            mpResponse = new ResponseEntity<Object>("no plan", null, HttpStatus.CREATED);
+            
+            return mpResponse;
+        }
+        
+    }
 
 	
 
