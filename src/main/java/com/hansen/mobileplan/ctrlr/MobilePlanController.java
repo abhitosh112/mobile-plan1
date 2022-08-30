@@ -43,11 +43,20 @@ public class MobilePlanController {
 		logger.info("Inside search method");
 		ResponseEntity<Object> mpResponse = null;
 		
-		//TODO Homework... write the code to read
-		
-		
-		return mpResponse;
+		Object mobilePlan= mpSrvc.read(id);
+		if(mobilePlan!=null)
+		{
+			mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.CREATED);
+			return mpResponse;
+		}
+		else
+		{
+			mpResponse = new ResponseEntity<Object>("ID not present", null, HttpStatus.NOT_FOUND);
+			return mpResponse;
+		}
 	}
+			
+	
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Iterable<MobilePlan>> readAll() {
