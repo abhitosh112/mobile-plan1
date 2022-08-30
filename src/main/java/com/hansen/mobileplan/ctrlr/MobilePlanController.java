@@ -88,8 +88,17 @@ public class MobilePlanController {
 		ResponseEntity<Object> bookResponse = null;
 		
 		//TODO Homework... write the code to delete
+		boolean mobilePlan = mpSrvc.delete(planid);
+		if(mobilePlan) {
+			bookResponse = new ResponseEntity<Object>("mobile plan deleted", null , HttpStatus.CREATED);
+		}
+		else{
+			bookResponse = new ResponseEntity<Object>("mobile plan not deleted", null, HttpStatus.NOT_ACCEPTABLE);
+		}
 		
 		return bookResponse;
+	  
+		
 	}
 
 }
