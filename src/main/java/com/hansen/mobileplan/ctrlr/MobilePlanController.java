@@ -59,28 +59,52 @@ public class MobilePlanController {
 	
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<Iterable<MobilePlan>> readAll() {
-		logger.info("Inside readAll method");
-		ResponseEntity<Iterable<MobilePlan>> mpResponse = null;
+	
+	public ResponseEntity<Object> readAll() {
+        logger.info("Inside readAll method");
+        ResponseEntity<Object> mpResponse = null;
 
-		//TODO Homework... write the code to readall
-		
-		
-		return mpResponse;
-	}
+       
+        Iterable<MobilePlan> mobilePlanList=mpSrvc.readAll();
+        
+        if(mobilePlanList!=null)
+        {
+            mpResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
+            
+            return mpResponse;
+        }
+        else
+        {
+            mpResponse = new ResponseEntity<Object>("no plan", null, HttpStatus.CREATED);
+            
+            return mpResponse;
+        }
+        
+    }
 
 	
 
 	@RequestMapping(method = RequestMethod.PATCH) // OR PUT
-	public ResponseEntity<Object> update(@RequestBody MobilePlan tobemerged) {
+	public ResponseEntity<String> update(@RequestBody MobilePlan tobemerged) {
 		logger.info("Inside update method");
-		ResponseEntity<Object> planResponse = null;
+		ResponseEntity<String> planResponse = null;
 		
 		//TODO Homework... write the code to update
 		
-		
-		return planResponse;	
+		Object mobilePlanList = mpSrvc.update(tobemerged);
+				
+		if(mobilePlanList!= null) {
+			planResponse = new ResponseEntity<String>(" Updated mobileplan list", null, HttpStatus.CREATED);
+			
+			return planResponse;
+		}
+		else {
+			planResponse = new ResponseEntity<String>(" Not found", null, HttpStatus.NOT_FOUND);
+			
+			return planResponse;
+		}	
 	}
+		
 
 	@RequestMapping(value = "{planid}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@PathVariable(value = "planid") Long planid) {
