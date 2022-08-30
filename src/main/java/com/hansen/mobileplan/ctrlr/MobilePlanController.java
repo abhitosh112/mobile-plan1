@@ -1,4 +1,6 @@
 package com.hansen.mobileplan.ctrlr;
+import java.util.Iterator;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,8 +68,10 @@ public class MobilePlanController {
 
        
         Iterable<MobilePlan> mobilePlanList=mpSrvc.readAll();
+    
         
-        if(mobilePlanList!=null)
+        Iterator<MobilePlan>itr=mobilePlanList.iterator();
+        if(itr.hasNext()== true)
         {
             mpResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
             
@@ -75,7 +79,7 @@ public class MobilePlanController {
         }
         else
         {
-            mpResponse = new ResponseEntity<Object>("no plan", null, HttpStatus.CREATED);
+            mpResponse = new ResponseEntity<Object>("no plan", null, HttpStatus.NOT_FOUND);
             
             return mpResponse;
         }
