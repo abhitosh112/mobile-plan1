@@ -118,7 +118,7 @@ public class MobilePlanController {
 		//TODO Homework... write the code to delete
 		boolean mobilePlan = mpSrvc.delete(planid);
 		if(mobilePlan) {
-			bookResponse = new ResponseEntity<Object>("mobile plan deleted", null , HttpStatus.CREATED);
+			bookResponse = new ResponseEntity<Object>("mobile plan deleted", null , HttpStatus.OK);
 		}
 		else{
 			bookResponse = new ResponseEntity<Object>("id not present for delete", null, HttpStatus.NOT_ACCEPTABLE);
