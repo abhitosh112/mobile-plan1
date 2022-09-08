@@ -1,4 +1,6 @@
-function InsertRecord()  
+
+
+      function createplan()  
         {  
             var id = document.getElementById('id').value;  
             var name = document.getElementById('name').value;  
@@ -18,11 +20,17 @@ function InsertRecord()
       		    console.log(xhr.status);
       			console.log(xhr.responseText);
    				}};
-                var obj = {"id": id ,"name": name ,"description":description ,"validity": validity};
+                var obj = {
+	            "id":id,
+	            "name": name ,
+	            "description":description ,
+	            "validity": validity
+	            };
+				
 				var myjson = JSON.stringify(obj);
 				xhr.send(myjson);
 				
-				if(xhr.status!=406)
+				if(xhr.status==201)
 				{
 				alert("Mobile Plan Added Successfully");
 				}
@@ -32,6 +40,6 @@ function InsertRecord()
 			}		
 			else
 			{
-				alert("Enter all fields");
+				alert("Enter required fields");
 			}
         }

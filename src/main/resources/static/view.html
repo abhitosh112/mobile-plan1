@@ -29,24 +29,9 @@
 
 </head>
 
-<!-- This is a very crude way of doing things meant for learning and training only -->
-	<script type="text/javascript">
-		function getmobileplanlist() {
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "http://localhost:8080/mp", false);
-			xhr.send();
-			var mpList = xhr.response;
-			var mobilePlans = JSON.parse(mpList)
-			
-			
-			var mobilePlanList = document.getElementById("mobileplans");
-            for (var i = 0; i < mobilePlans.length; i++) {
-                mobilePlanList.innerHTML += '<li>' + mobilePlans[i].id +"&nbsp;&nbsp;&nbsp;&nbsp;"+ mobilePlans[i].name +"&nbsp;&nbsp;&nbsp;&nbsp;"+ mobilePlans[i].description+"&nbsp;&nbsp;&nbsp;&nbsp;"+ mobilePlans[i].validity+  '</li>';
-            }	
-		}
-	</script>
 
-<body onload=getmobileplanlist()>
+
+<body>
 
 <header class="sticky-top navigation">
   <div class=container>
@@ -79,15 +64,25 @@
 <section class="pt-5">
   <div class="container shadow section-sm rounded" style="background:#fce303;">
     <div class="row">
-
-      
-          
-	<ul id="mobileplans">
-	</ul>
-
     </div>
-
-    <section class="section pb-0">
+ <!--table for view id -->
+ 
+ <table class="table table-bordered border-dark">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">name</th>
+      <th scope="col">description</th>
+      <th scope="col">validity</th>
+    </tr>
+  </thead>
+  <tbody>
+ 
+  </tbody>
+</table>   
+	
+      
+   <section class="section pb-0">
       <div class="container">
         <div class="row justify-content-between align-items-center">
 
@@ -100,10 +95,10 @@
 
               <div class="form-group">
                 <label for="inputAddress">ID</label>
-                <input type="number" class="form-control" id="inputAddress" placeholder="">
+                <input type="number" class="form-control" id="id" placeholder="">
               </div>
   
-              <button type="submit" class="btn btn-primary" style="margin: 30px;">Search MobilePlan</button>
+              <button type="submit" class="btn btn-primary" onclick="getBYID()"style="margin: 30px;">Search MobilePlan</button>
             </form>
           </div>
           
@@ -137,7 +132,7 @@
 <script src="plugins/masonry/masonry.min.js"></script>
 <script src="plugins/clipboard/clipboard.min.js"></script>
 <script src="plugins/match-height/jquery.matchHeight-min.js"></script>
-
+<script src="js/view.js"></script>
 <!-- Main Script -->
 <script src="js/script.js"></script>
 
