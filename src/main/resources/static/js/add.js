@@ -1,6 +1,6 @@
 function InsertRecord()  
         {  
-            //var id = document.getElementById('id').value;  
+            var id = document.getElementById('id').value;  
             var name = document.getElementById('name').value;  
             var description = document.getElementById('description').value;  
             var validity = document.getElementById('validity').value; 
@@ -18,7 +18,7 @@ function InsertRecord()
       		    console.log(xhr.status);
       			console.log(xhr.responseText);
    				}};
-                var obj = {"name": name ,"description":description ,"validity": validity};
+                var obj = {"id": id ,"name": name ,"description":description ,"validity": validity};
 				var myjson = JSON.stringify(obj);
 				xhr.send(myjson);
 				
