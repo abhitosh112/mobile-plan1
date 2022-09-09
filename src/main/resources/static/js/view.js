@@ -1,6 +1,4 @@
-function refresh(){
-	location.reload();
-}
+
      function getBYID()
          {
 			console.log("outside");
