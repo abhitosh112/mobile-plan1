@@ -35,7 +35,7 @@ public class MobilePlanController {
 			mpResponse = new ResponseEntity<String>("MobilePlan Created", null, HttpStatus.CREATED);
 			return mpResponse;
 		} else {
-			mpResponse = new ResponseEntity<String>("MobilePlan alraedy Present for this id", null, HttpStatus.NOT_ACCEPTABLE);
+			mpResponse = new ResponseEntity<String>("MobilePlan already Present for this id", null, HttpStatus.NOT_ACCEPTABLE);
 			return mpResponse;
 		}
 	}
