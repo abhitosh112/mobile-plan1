@@ -48,7 +48,8 @@ public class MobilePlanSrvc {
 		//TODO Homework... write the code to upgrade
 		Optional<MobilePlan> person = mobilePlanDao.findById(tobemerged.getId());
 		
-		if(person.isPresent() && tobemerged.getDescription() != null && tobemerged.getName()!= null && tobemerged.getValidity() !=0) {
+		if(person.isPresent() && tobemerged.getDescription() != null && tobemerged.getName()!= null && tobemerged.getValidity() !=0)
+		{
 			MobilePlan mobileplan = mobilePlanDao.save(tobemerged);
 			return mobileplan;
 		}

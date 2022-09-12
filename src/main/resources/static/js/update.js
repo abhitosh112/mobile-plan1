@@ -1,4 +1,4 @@
-function setValue()
+		function setValue()
 		{
 			var url_string = window.location;
 			var url = new URL(url_string);
@@ -10,9 +10,9 @@ function setValue()
 			document.getElementById('name').value = name;
 			document.getElementById('description').value = description;
 			document.getElementById('validity').value = validity;
-			
 		}
-		function UpdateRecord()  
+		
+		function UpdateRecord()
         {  
             var id = document.getElementById('id').value;  
             var name = document.getElementById('name').value;  
