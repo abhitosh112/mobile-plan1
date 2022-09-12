@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Update1 Page</title>
+  <title>Update Page</title>
 
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -31,12 +31,12 @@
         <i class="ti-align-right h4 text-dark"></i></button>
       <div class="collapse navbar-collapse text-center" id=navigation>
         <ul class="navbar-nav mx-auto align-items-center">
-
+ 
         <a href="index.html" class="btn btn-sm btn-outline-primary ml-lg-4">Home</a>
         <a href="add.html" class="btn btn-sm btn-outline-primary ml-lg-4">Create</a>
         <a href="view.html" class="btn btn-sm btn-outline-primary ml-lg-4">View</a>
         <a href="view all.html" class="btn btn-sm btn-outline-primary ml-lg-4">View All</a>
-        <a href="update.html" class="btn btn-sm btn-outline-primary ml-lg-4">Update</a>
+        <a href="update1.html" class="btn btn-sm btn-outline-primary ml-lg-4">Update</a>
         <a href="delete.html" class="btn btn-sm btn-outline-primary ml-lg-4">Delete</a>
         </ul>
         
@@ -66,24 +66,24 @@
 
                 <div class="form-group">
                   <label for="inputAddress">ID</label>
-                  <input type="number" class="form-control" id="inputAddress" placeholder="">
+                  <input type="number" class="form-control" id="id" placeholder="">
                 </div>
     
                 <div class="form-group">
                   <label for="inputAddress">NAME</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="">
+                  <input type="text" class="form-control" id="name" placeholder="">
                 </div>
                 <div class="form-group">
                   <label for="inputAddress2">DESCRIPTION</label>
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="">
+                  <input type="text" class="form-control" id="description" placeholder="">
                 </div>
     
                 <div class="form-group">
                   <label for="inputAddress2">VALIDITY</label>
-                  <input type="number" class="form-control" id="inputAddress2" placeholder="">
+                  <input type="number" class="form-control" id="validity" placeholder="">
                 </div>
     
-                <button type="submit" class="btn btn-primary" style="margin: 30px;">UPDATE MobilePlan</button>
+                <button type="submit" class="btn btn-primary" onclick="UpdateRecord()" style="margin: 30px;">UPDATE MobilePlan</button>
               </form>
             </div>
             
@@ -119,6 +119,8 @@
 <script src="plugins/masonry/masonry.min.js"></script>
 <script src="plugins/clipboard/clipboard.min.js"></script>
 <script src="plugins/match-height/jquery.matchHeight-min.js"></script>
+<script src="js/edit.js"></script>
+<script src="js/update.js"></script>
 
 <!-- Main Script -->
 <script src="js/script.js"></script>

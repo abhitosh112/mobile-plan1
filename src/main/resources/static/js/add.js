@@ -2,7 +2,7 @@
 
       function createplan()  
         {  
-            var id = document.getElementById('id').value;  
+            //var id = document.getElementById('id').value;  
             var name = document.getElementById('name').value;  
             var description = document.getElementById('description').value;  
             var validity = document.getElementById('validity').value; 
@@ -21,7 +21,7 @@
       			console.log(xhr.responseText);
    				}};
                 var obj = {
-	            "id":id,
+	            //"id":id,
 	            "name": name ,
 	            "description":description ,
 	            "validity": validity
