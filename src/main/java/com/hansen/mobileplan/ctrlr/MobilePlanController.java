@@ -35,7 +35,7 @@ public class MobilePlanController {
 			mpResponse = new ResponseEntity<String>("MobilePlan Created", null, HttpStatus.CREATED);
 			return mpResponse;
 		} else {
-			mpResponse = new ResponseEntity<String>("MobilePlan alraedy Present for this id", null, HttpStatus.NOT_ACCEPTABLE);
+			mpResponse = new ResponseEntity<String>("MobilePlan already Present for this id", null, HttpStatus.NOT_ACCEPTABLE);
 			return mpResponse;
 		}
 	}
@@ -79,7 +79,7 @@ public class MobilePlanController {
         }
         else
         {
-            mpResponse = new ResponseEntity<Object>("no plan", null, HttpStatus.NOT_FOUND);
+            mpResponse = new ResponseEntity<Object>("No single plan presents", null, HttpStatus.NOT_FOUND);
             
             return mpResponse;
         }
@@ -98,12 +98,12 @@ public class MobilePlanController {
 		Object mobilePlanList = mpSrvc.update(tobemerged);
 				
 		if(mobilePlanList!= null) {
-			planResponse = new ResponseEntity<String>(" Updated mobileplan list", null, HttpStatus.CREATED);
+			planResponse = new ResponseEntity<String>("Updated mobileplan list", null, HttpStatus.CREATED);
 			
 			return planResponse;
 		}
 		else {
-			planResponse = new ResponseEntity<String>("id Not Present for update", null, HttpStatus.NOT_FOUND);
+			planResponse = new ResponseEntity<String>("ID Not Present for update", null, HttpStatus.NOT_FOUND);
 			
 			return planResponse;
 		}	
@@ -118,10 +118,10 @@ public class MobilePlanController {
 		//TODO Homework... write the code to delete
 		boolean mobilePlan = mpSrvc.delete(planid);
 		if(mobilePlan) {
-			bookResponse = new ResponseEntity<Object>("mobile plan deleted", null , HttpStatus.OK);
+			bookResponse = new ResponseEntity<Object>("Mobile plan deleted", null , HttpStatus.OK);
 		}
 		else{
-			bookResponse = new ResponseEntity<Object>("id not present for delete", null, HttpStatus.NOT_ACCEPTABLE);
+			bookResponse = new ResponseEntity<Object>("ID Not present for delete", null, HttpStatus.NOT_ACCEPTABLE);
 		}
 		
 		return bookResponse;
