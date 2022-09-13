@@ -22,7 +22,7 @@
 			var td4=document.createElement('td');
 			td4.innerHTML=currentElement.validity;
 			var td5=document.createElement('td');
-			td5.innerHTML='<button type="button" class="btn btn-outline-danger" onclick=deletebyid('+currentElement.id+')>Delete</button></td>';
+			td5.innerHTML='<button type="button" class="btn btn-outline-danger" onclick=deletebyid('+currentElement.id+')><img class="image-icon" src="images/delete.png"></button></td>';
 			var td6=document.createElement('td');
 			td6.innerHTML="<form ><a href='http://localhost:8080/update.html?id="
 						+ currentElement.id
