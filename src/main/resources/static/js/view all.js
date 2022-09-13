@@ -32,7 +32,7 @@
 						+ currentElement.description
 						+ "&validity="
 						+ currentElement.validity
-						+ "'><input value ='Edit' class='btn btn-outline-danger' id = " + currentElement.id + " type='button' /></form>"
+						+ "'><button class='btn btn-outline-danger' id = " + currentElement.id + " type='button'><img class='image-icon' src='images/edit.png'></button></form>"
 			
 			
 			tr.appendChild(td1);

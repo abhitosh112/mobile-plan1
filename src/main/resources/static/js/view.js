@@ -33,7 +33,7 @@
 						td4.innerHTML=mobilePlans[i].validity;
 				
 				 		var td5=document.createElement('td');
-			            td5.innerHTML='<button type="button" class="btn btn-outline-danger" onclick=deletebyid('+mobilePlans[i].id+')>Delete</button></td>';
+			            td5.innerHTML='<button type="button" class="btn btn-outline-danger" onclick=deletebyid('+mobilePlans[i].id+')><img class="image-icon" src="images/delete.png"></button></td>';
 			            var td6=document.createElement('td');
 			            td6.innerHTML="<form ><a href='http://localhost:8080/update.html?id="
 						+ mobilePlans[i].id
@@ -43,7 +43,7 @@
 						+ mobilePlans[i].description
 						+ "&validity="
 						+ mobilePlans[i].validity
-						+ "'><input value ='Edit' class='btn btn-outline-danger' id = " + mobilePlans[i].id + " type='button' /></form>"
+						+ "'><button class='btn btn-outline-danger' id = " + mobilePlans[i].id + " type='button'><img class='image-icon' src='images/edit.png'></button></form>"
 				
 						tr.appendChild(td1);
 						tr.appendChild(td2);

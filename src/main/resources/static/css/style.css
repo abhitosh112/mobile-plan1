@@ -862,4 +862,8 @@ pre .copy-to-clipboard {
 .table-border{
   border-color: #000;
 }
+.image-icon{
+    width:30px;
+    height:30px;
+}
 /*# sourceMappingURL=style.css.map */
