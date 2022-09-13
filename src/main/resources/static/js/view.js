@@ -32,11 +32,25 @@
 						var td4=document.createElement('td');
 						td4.innerHTML=mobilePlans[i].validity;
 				
+				 		var td5=document.createElement('td');
+			            td5.innerHTML='<button type="button" class="btn btn-outline-danger" onclick=deletebyid('+mobilePlans[i].id+')>Delete</button></td>';
+			            var td6=document.createElement('td');
+			            td6.innerHTML="<form ><a href='http://localhost:8080/update.html?id="
+						+ mobilePlans[i].id
+						+ "&name="
+						+ mobilePlans[i].name
+						+ "&description="
+						+ mobilePlans[i].description
+						+ "&validity="
+						+ mobilePlans[i].validity
+						+ "'><input value ='Edit' class='btn btn-outline-danger' id = " + mobilePlans[i].id + " type='button' /></form>"
 				
 						tr.appendChild(td1);
 						tr.appendChild(td2);
 						tr.appendChild(td3);
 						tr.appendChild(td4);
+						tr.appendChild(td5);
+			            tr.appendChild(td6);
 						tbody.removeChild(tbody.childNodes[0]);
 						tbody.appendChild(tr);
 						//tbody.replaceChild(tr,tbody.childNodes[0]);
