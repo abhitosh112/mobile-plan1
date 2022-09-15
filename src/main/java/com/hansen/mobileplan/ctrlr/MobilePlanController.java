@@ -62,9 +62,9 @@ public class MobilePlanController {
 		if(mobilePlan!=null)
 		{
 			mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.CREATED);
-			
-			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ BY ID",mpResponse.getBody().toString(),date));
-			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+//			
+//			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ BY ID",mpResponse.getBody().toString(),date));
+//			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 			
 			return mpResponse;
 		}
@@ -91,9 +91,9 @@ public class MobilePlanController {
         if(itr.hasNext()== true)
         {
             mpResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
-            
-            HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ ALL",mpResponse.getBody().toString(),date));
-			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+//            
+//            HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ ALL",mpResponse.getBody().toString(),date));
+//			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
             
             return mpResponse;
         }
@@ -120,8 +120,8 @@ public class MobilePlanController {
 		if(mobilePlanList!= null) {
 			planResponse = new ResponseEntity<String>("Updated mobileplan list", null, HttpStatus.CREATED);
 			
-			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("UPDATED",planResponse.getBody().toString(),date));
-			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+//			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("UPDATED",planResponse.getBody().toString(),date));
+//			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 			
 			return planResponse;
 		}
@@ -143,8 +143,8 @@ public class MobilePlanController {
 		if(mobilePlan) {
 			bookResponse = new ResponseEntity<Object>("Mobile plan deleted", null , HttpStatus.OK);
 			
-			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("DELETED",bookResponse.toString(),date));
-			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+//			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("DELETED",bookResponse.toString(),date));
+//			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 		}
 		else{
 			bookResponse = new ResponseEntity<Object>("ID Not present for delete", null, HttpStatus.NOT_ACCEPTABLE);
