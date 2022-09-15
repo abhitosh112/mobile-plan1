@@ -1,9 +1,12 @@
 package com.hansen.mobileplan.ctrlr;
+import java.util.Date;
 import java.util.Iterator;
+import org.springframework.web.client.RestTemplate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hansen.mobileplan.dao.MobilePlanDao;
 import com.hansen.mobileplan.model.MobilePlan;
 import com.hansen.mobileplan.srvc.MobilePlanSrvc;
+import com.hansen.mobileplan.model.Auditlog;
 
 @RestController
 @RequestMapping("/mp")
@@ -25,17 +29,26 @@ public class MobilePlanController {
 
 	@Autowired
 	MobilePlanDao mobilePlanDao;
+	
+	RestTemplate restTemplate = new RestTemplate();
+	
+	Date date =new Date();
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<String> create(@RequestBody MobilePlan inputentity) {
+	public ResponseEntity<Object> create(@RequestBody MobilePlan inputentity) {
 		logger.info("Inside add method");
-		ResponseEntity<String> mpResponse;
+		ResponseEntity<Object> mpResponse;
+		System.out.print(date);
 		Object mobilePlan = mpSrvc.create(inputentity);
 		if (mobilePlan != null) {
-			mpResponse = new ResponseEntity<String>("MobilePlan Created", null, HttpStatus.CREATED);
+			mpResponse = new ResponseEntity<Object>("MobilePlan Created", null, HttpStatus.CREATED);
+			// audit log using RestTemplate
+			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("CREATED",mpResponse.getBody().toString(),date));
+			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+			
 			return mpResponse;
 		} else {
-			mpResponse = new ResponseEntity<String>("MobilePlan already Present for this id", null, HttpStatus.NOT_ACCEPTABLE);
+			mpResponse = new ResponseEntity<Object>("MobilePlan already Present for this id", null, HttpStatus.NOT_ACCEPTABLE);
 			return mpResponse;
 		}
 	}
@@ -49,6 +62,10 @@ public class MobilePlanController {
 		if(mobilePlan!=null)
 		{
 			mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.CREATED);
+			
+			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ BY ID",mpResponse.getBody().toString(),date));
+			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+			
 			return mpResponse;
 		}
 		else
@@ -75,6 +92,9 @@ public class MobilePlanController {
         {
             mpResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
             
+            HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ ALL",mpResponse.getBody().toString(),date));
+			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+            
             return mpResponse;
         }
         else
@@ -100,6 +120,9 @@ public class MobilePlanController {
 		if(mobilePlanList!= null) {
 			planResponse = new ResponseEntity<String>("Updated mobileplan list", null, HttpStatus.CREATED);
 			
+			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("UPDATED",planResponse.getBody().toString(),date));
+			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+			
 			return planResponse;
 		}
 		else {
@@ -119,6 +142,9 @@ public class MobilePlanController {
 		boolean mobilePlan = mpSrvc.delete(planid);
 		if(mobilePlan) {
 			bookResponse = new ResponseEntity<Object>("Mobile plan deleted", null , HttpStatus.OK);
+			
+			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("DELETED",bookResponse.toString(),date));
+			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 		}
 		else{
 			bookResponse = new ResponseEntity<Object>("ID Not present for delete", null, HttpStatus.NOT_ACCEPTABLE);
