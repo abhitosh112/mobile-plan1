@@ -41,16 +41,17 @@ public class MobilePlanController {
 		System.out.print(date);
 		Object mobilePlan = mpSrvc.create(inputentity);
 		if (mobilePlan != null) {
-			mpResponse = new ResponseEntity<Object>("MobilePlan Created", null, HttpStatus.CREATED);
+			mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.CREATED);
+			
 			// audit log using RestTemplate
 			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("CREATED",mpResponse.getBody().toString(),date));
 			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 			
-			return mpResponse;
 		} else {
 			mpResponse = new ResponseEntity<Object>("MobilePlan already Present for this id", null, HttpStatus.NOT_ACCEPTABLE);
-			return mpResponse;
+			
 		}
+		return mpResponse;
 	}
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
@@ -63,16 +64,16 @@ public class MobilePlanController {
 		{
 			mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.CREATED);
 //			
-//			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ BY ID",mpResponse.getBody().toString(),date));
-//			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ BY ID",mpResponse.getBody().toString(),date));
+			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 			
-			return mpResponse;
 		}
 		else
 		{
 			mpResponse = new ResponseEntity<Object>("ID not present", null, HttpStatus.NOT_FOUND);
-			return mpResponse;
+			
 		}
+		return mpResponse;
 	}
 			
 	
@@ -83,53 +84,46 @@ public class MobilePlanController {
         logger.info("Inside readAll method");
         ResponseEntity<Object> mpResponse = null;
 
-       
         Iterable<MobilePlan> mobilePlanList=mpSrvc.readAll();
-    
-        
         Iterator<MobilePlan>itr=mobilePlanList.iterator();
+        
         if(itr.hasNext()== true)
         {
             mpResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
 //            
-//            HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ ALL",mpResponse.getBody().toString(),date));
-//			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
-            
-            return mpResponse;
+            HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ ALL",mpResponse.getBody().toString().substring(0, 100),date));
+			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+           
         }
         else
         {
             mpResponse = new ResponseEntity<Object>("No single plan presents", null, HttpStatus.NOT_FOUND);
             
-            return mpResponse;
         }
-        
+        return mpResponse;
     }
 
 	
 
 	@RequestMapping(method = RequestMethod.PATCH) // OR PUT
-	public ResponseEntity<String> update(@RequestBody MobilePlan tobemerged) {
+	public ResponseEntity<Object> update(@RequestBody MobilePlan tobemerged) {
 		logger.info("Inside update method");
-		ResponseEntity<String> planResponse = null;
+		ResponseEntity<Object> planResponse = null;
 		
 		//TODO Homework... write the code to update
 		
 		Object mobilePlanList = mpSrvc.update(tobemerged);
 				
 		if(mobilePlanList!= null) {
-			planResponse = new ResponseEntity<String>("Updated mobileplan list", null, HttpStatus.CREATED);
+			planResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
 			
-//			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("UPDATED",planResponse.getBody().toString(),date));
-//			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
-			
-			return planResponse;
+			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("UPDATED",planResponse.getBody().toString(),date));
+			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 		}
 		else {
-			planResponse = new ResponseEntity<String>("ID Not Present for update", null, HttpStatus.NOT_FOUND);
-			
-			return planResponse;
-		}	
+			planResponse = new ResponseEntity<Object>("ID Not Present for update", null, HttpStatus.NOT_FOUND);	
+		}
+		return planResponse;
 	}
 		
 
@@ -138,13 +132,15 @@ public class MobilePlanController {
 		logger.info("Inside delete method");
 		ResponseEntity<Object> bookResponse = null;
 		
+		MobilePlan mp= (MobilePlan) mpSrvc.read(planid);
+		
 		//TODO Homework... write the code to delete
 		boolean mobilePlan = mpSrvc.delete(planid);
 		if(mobilePlan) {
 			bookResponse = new ResponseEntity<Object>("Mobile plan deleted", null , HttpStatus.OK);
 			
-//			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("DELETED",bookResponse.toString(),date));
-//			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("DELETED",mp.toString(),date));
+			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 		}
 		else{
 			bookResponse = new ResponseEntity<Object>("ID Not present for delete", null, HttpStatus.NOT_ACCEPTABLE);
