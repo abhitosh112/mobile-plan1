@@ -64,8 +64,8 @@ public class MobilePlanController {
 		{
 			mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.CREATED);
 //			
-			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ BY ID",mpResponse.getBody().toString(),date));
-			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+			//HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ BY ID",mpResponse.getBody().toString(),date));
+			//restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 			
 		}
 		else
@@ -91,8 +91,8 @@ public class MobilePlanController {
         {
             mpResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
 //            
-            HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ ALL",mpResponse.getBody().toString().substring(0, 100),date));
-			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+            //HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ ALL",mpResponse.getBody().toString().substring(0, 100),date));
+			//restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
            
         }
         else

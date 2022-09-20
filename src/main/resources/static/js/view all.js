@@ -5,7 +5,9 @@
 		 
 		xhr.onload = function(){
 		var d=JSON.parse(xhr.response);
-		console.log(d);		
+		console.log(d);
+		var x=document.getElementById('table-head')
+		x.innerHTML='<tr><th scope="col">ID1</th><th scope="col">NAME</th><th scope="col">DESCRIPTION</th><th scope="col">VALIDITY</th><th scope="col">ACTIONS</th><th scope="col">UPDATE</th></tr>';
 	    
 	    var tbody=document.querySelector('.table > tbody')
 	     
@@ -24,7 +26,7 @@
 			var td5=document.createElement('td');
 			td5.innerHTML='<button type="button" class="btn btn-outline-danger" onclick=deletebyid('+currentElement.id+')><img class="image-icon" src="images/delete.png"></button></td>';
 			var td6=document.createElement('td');
-			td6.innerHTML="<form ><a href='http://localhost:8080/update.html?id="
+			td6.innerHTML="<a href='http://localhost:8080/update.html?id="
 						+ currentElement.id
 						+ "&name="
 						+ currentElement.name
@@ -32,7 +34,7 @@
 						+ currentElement.description
 						+ "&validity="
 						+ currentElement.validity
-						+ "'><button class='btn btn-outline-danger' id = " + currentElement.id + " type='button'><img class='image-icon' src='images/edit.png'></button></form>"
+						+ "'><button class='btn btn-outline-danger' id = " + currentElement.id + " type='button'><img class='image-icon' src='images/edit.png'></button>"
 			
 			
 			tr.appendChild(td1);

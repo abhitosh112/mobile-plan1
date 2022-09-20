@@ -52,21 +52,22 @@
 
 <!-- details page -->
 <section class="pt-5">
-  <div class="container shadow section-sm rounded" style="background:#fce303;">
+  <div class="back-image container shadow section-sm rounded" >
+    <!-- style="background:#fce303;"> -->
     <div class="row">
     </div>
  <!--table for view id -->
  
  <table class="table table-bordered border-dark">
-  <thead>
-    <tr>
+  <thead id="table-head-view">
+    <!-- <tr>
       <th scope="col">ID</th>
       <th scope="col">NAME</th>
       <th scope="col">DESCRIPTION</th>
       <th scope="col">VALIDITY</th>
       <th scope="col">ACTIONS</th>
       <th scope="col">UPDATE</th>
-    </tr>
+    </tr> -->
   </thead>
   <tbody>
  
@@ -83,6 +84,7 @@
           </div>
 
           <div class="col-lg-7 text-center text-lg-left">
+            <div class="form-width">
             <form>
 
               <div class="form-group">
@@ -92,6 +94,7 @@
   
               <button type="button" class="btn btn-primary" onclick="getBYID()"style="margin: 30px;">Search MobilePlan</button>
             </form>
+          </div>
           </div>
           
         </div>
