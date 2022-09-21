@@ -94,6 +94,12 @@ h6, .h6 {
   z-index: 1;
   transition: 0.2s ease;
   font-weight: 600;
+  
+}
+.align-center{
+  display: grid;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 .btn:hover, .btn:active, .btn:focus {
   outline: 0;
@@ -631,7 +637,7 @@ form{
 }
 .form-group .form-control {
   height: 30px;
-  width: 300px auto;;
+  width: 300px auto;
   background: transparent;
   border: 0;
   border-bottom: 1px solid #050404;
@@ -900,4 +906,11 @@ th{
 	background-color: rgba(48, 46, 46, 0.865);
 	color:white;
 }
+.table-space{
+  margin-top: 50px;
+}
+.required{
+	color:red;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -1,4 +1,9 @@
- function deletebyid(deleteid)
+function deletebyid(id){
+	if(confirm("Are you sure want to delete ?")){
+		deletebyid1(id);
+	}
+}
+function deletebyid1(deleteid)
  {
 	var d=deleteid;
 	console.log("outside");

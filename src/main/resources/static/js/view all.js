@@ -7,7 +7,7 @@
 		var d=JSON.parse(xhr.response);
 		console.log(d);
 		var x=document.getElementById('table-head')
-		x.innerHTML='<tr><th scope="col">ID1</th><th scope="col">NAME</th><th scope="col">DESCRIPTION</th><th scope="col">VALIDITY</th><th scope="col">ACTIONS</th><th scope="col">UPDATE</th></tr>';
+		x.innerHTML='<tr><th scope="col">PLAN ID</th><th scope="col">NAME</th><th scope="col">DESCRIPTION</th><th scope="col">VALIDITY</th><th scope="col">ACTIONS</th><th scope="col">UPDATE</th></tr>';
 	    
 	    var tbody=document.querySelector('.table > tbody')
 	     
