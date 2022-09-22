@@ -11,9 +11,30 @@
 				var xhr = new XMLHttpRequest();
 				xhr.open("GET", "http://localhost:8080/mp/"+userid, false);
 				xhr.send();
+
 				var mpList = xhr.response;
-				var mobilePlans = JSON.parse(mpList);
 				
+			
+				console.log(mpList);
+				if(mpList=="ID not present")
+				{
+					alert("Mobile Plan for ID "+userid+" not present");
+				}
+				else
+				{
+					search();
+					alert("Data for ID "+userid+" is fetched");
+				}
+			}
+			else
+			{
+				alert("Please Enter ID");
+			}
+		}
+				
+			function search()
+			{
+				var mobilePlans = JSON.parse(mpList);
 				var flag = 0;
 				
 				console.log("outside");
@@ -56,22 +77,8 @@
 						tbody.appendChild(tr);
 						//tbody.replaceChild(tr,tbody.childNodes[0]);
 						flag=1;
-	  			
-			
-		        if(flag == 1)
-		        {
-					alert("Data for ID "+userid+" is fetched");
-				}
-				else
-				{
-					alert("Mobile Plan for this ID is not present");
-				}
-					
-				}
-			else
-			{
-				alert("Please Enter ID");
 			}
+					
 			/*
 			if(userid.length!=0)
 			{
@@ -147,5 +154,5 @@
 			}
 			*/
 			
-   	}			
+			
 		
