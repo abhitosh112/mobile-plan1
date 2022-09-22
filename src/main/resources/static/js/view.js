@@ -71,19 +71,19 @@
 		 
 		if(flag == 1)
 		        {
-					alert("Data for ID  is fetched");
+					alert("Data for this Name is fetched");
 				
 				}
 				else
 				{
-					alert("Mobile Plan for this ID is not present");
+					alert("Mobile Plan for this name is not present");
 				}
 					
 	}
 			
 			else
 			{
-				alert("Please Enter ID");
+				alert("Please Enter Name");
 			}
 			
 			
