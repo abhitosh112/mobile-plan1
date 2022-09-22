@@ -7,6 +7,10 @@
 			console.log("outside");
 			var pname =document.getElementById('name').value;
 			
+			var x=document.getElementById('table-head-view')
+			x.innerHTML='<tr><th scope="col">PLAN ID</th><th scope="col">NAME</th><th scope="col">DESCRIPTION</th><th scope="col">VALIDITY</th><th scope="col">ACTIONS</th><th scope="col">UPDATE</th></tr>';
+			
+			
 			if(pname.length!=0)
 			{
 				var xhr = new XMLHttpRequest();
@@ -71,19 +75,19 @@
 		 
 		if(flag == 1)
 		        {
-					alert("Data for this Name is fetched");
+					alert("Data for this Plan Name is fetched");
 				
 				}
 				else
 				{
-					alert("Mobile Plan for this name is not present");
+					alert("Plan Name not present");
 				}
 					
 	}
 			
 			else
 			{
-				alert("Please Enter Name");
+				alert("Please Enter Plan Name");
 			}
 			
 			
