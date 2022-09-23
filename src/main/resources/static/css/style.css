@@ -350,8 +350,8 @@ a:hover {
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
-  padding: 20px;
-  font-size: 15px;
+  padding: 10px;
+  font-size: 5px;
 }
 @media (max-width: 991px) {
   .navbar-expand-lg .navbar-nav .nav-link {
