@@ -27,10 +27,10 @@
 			var tbody=document.querySelector('.table > tbody')
 		   
 		   
-					while(tbody.firstChild)
-		  {
-			 tbody.removeChild(tbody.firstChild);
-		  }
+			while(tbody.firstChild)
+		  	{
+				tbody.removeChild(tbody.firstChild);
+		  	}
 		
 		    mobilePlans.forEach((currentElement,index,arr) =>{
 		     
@@ -60,8 +60,7 @@
 						+ "&validity="
 						+ currentElement.validity
 						+ "'><button class='btn btn-outline-danger' id = " + currentElement.id + " type='button'><img class='image-icon' src='images/edit.png'></button>"
-			
-			
+						
 			tr.appendChild(td1);
 			tr.appendChild(td2);
 			tr.appendChild(td3);
