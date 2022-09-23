@@ -51,7 +51,7 @@
 			var td5=document.createElement('td');
 			td5.innerHTML='<button type="button" class="btn btn-outline-danger" onclick=deletebyid('+currentElement.id+')><img class="image-icon" src="images/delete.png"></button></td>';
 			var td6=document.createElement('td');
-			td6.innerHTML="<form ><a href='http://localhost:8080/update.html?id="
+			td6.innerHTML="<a href='http://localhost:8080/update.html?id="
 						+ currentElement.id
 						+ "&name="
 						+ currentElement.name
@@ -59,7 +59,7 @@
 						+ currentElement.description
 						+ "&validity="
 						+ currentElement.validity
-						+ "'><button class='btn btn-outline-danger' id = " + currentElement.id + " type='button'><img class='image-icon' src='images/edit.png'></button></form>"
+						+ "'><button class='btn btn-outline-danger' id = " + currentElement.id + " type='button'><img class='image-icon' src='images/edit.png'></button>"
 			
 			
 			tr.appendChild(td1);
@@ -75,19 +75,19 @@
 		 
 		if(flag == 1)
 		        {
-					alert("Data for this Plan Name is fetched");
+					alert("Data for this plan name fetched");
 				
 				}
 				else
 				{
-					alert("Plan Name not present");
+					alert("Plan name not present");
 				}
 					
 	}
 			
 			else
 			{
-				alert("Please Enter Plan Name");
+				alert("Please enter Plan Name");
 			}
 			
 			
