@@ -6,6 +6,7 @@
 			
 			console.log("outside");
 			var pname =document.getElementById('name').value;
+			pname=pname.toUpperCase();
 			
 			var x=document.getElementById('table-head-view')
 			x.innerHTML='<tr><th scope="col">PLAN ID</th><th scope="col">NAME</th><th scope="col">DESCRIPTION</th><th scope="col">VALIDITY</th><th scope="col">ACTIONS</th><th scope="col">UPDATE</th></tr>';
@@ -35,7 +36,9 @@
 		    mobilePlans.forEach((currentElement,index,arr) =>{
 		     
 			console.log(currentElement);
-			if(currentElement.name==pname)
+			x=currentElement.name;
+			x=x.toUpperCase();
+			if(x==pname)
 			{
 				
 			var th=document.createElement('th');	
