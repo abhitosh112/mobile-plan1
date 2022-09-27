@@ -1,100 +1,178 @@
-	
 	//testing for git hub
+	// function planIdFun() {
+	// 	var checkBox1 = document.getElementById("myCheckId");
+	// 	var div1 = document.getElementById("divPlanId");
+	// 	if (checkBox1.checked == true){
+	// 	  div1.style.display = "block";
+	// 	} else {
+	// 	   div1.style.display = "none";
+	// 	}
+	//   }
+	var checkBox2;
+	var checkBox3;
+	var checkBox4;
+	checkBox2 = document.getElementById("myCheckName");
+	checkBox3 = document.getElementById("myCheckDesc");
+	checkBox4 = document.getElementById("myCheckVal");
+	function planNameFun() {
+		
+		var div2 = document.getElementById("divPlanName");
+		if (checkBox2.checked == true){
+		  div2.style.display = "block";
+		} else {
+		   div2.style.display = "none";
+		}
+	  }
+	  function planDescFun() {
+		
+		var div3 = document.getElementById("divPlanDesc");
+		if (checkBox3.checked == true){
+		  div3.style.display = "block";
+		} else {
+		   div3.style.display = "none";
+		}
+	  }
+	  function planValFun() {
+		
+		var div4 = document.getElementById("divPlanVal");
+		if (checkBox4.checked == true){
+		  div4.style.display = "block";
+		} else {
+		   div4.style.display = "none";
+		}
+	  }
 	
 	function getBYID()
      {
 			
 			console.log("outside");
+
 			var pname =document.getElementById('name').value;
 			pname=pname.toUpperCase();
+
+			var pdesc=document.getElementById('description').value;
+			pdesc=pdesc.toUpperCase();
+
+			var pvalidity=document.getElementById('validity').value;
+  
+			//var pid =document.getElementById('planIdView').value;
+
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "http://localhost:8080/mp", false);
+			xhr.send();
+			var mpList = xhr.response;
+			console.log(xhr.response);
+				
+			var mobilePlans = JSON.parse(mpList);
+			var flag = 0;
 			
-			var x=document.getElementById('table-head-view')
-			x.innerHTML='<tr><th scope="col">PLAN ID</th><th scope="col">NAME</th><th scope="col">DESCRIPTION</th><th scope="col">VALIDITY</th><th scope="col">ACTIONS</th><th scope="col">UPDATE</th></tr>';
 			
-			
-			if(pname.length!=0)
+			if(pname.length!=0 || pdesc.length!=0 || pvalidity.length!=0)
 			{
-				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "http://localhost:8080/mp", false);
-				xhr.send();
-				var mpList = xhr.response;
-				console.log(xhr.response);
+				var tbody=document.querySelector('.table > tbody')
 				
-				var mobilePlans = JSON.parse(mpList);
-				var flag = 0;
+				while(tbody.firstChild)
+				{
+					tbody.removeChild(tbody.firstChild);
+				}
 				
-				console.log("outside");
+				try
+				{
+				mobilePlans.forEach((currentElement,index,arr) =>{
 				
-			var tbody=document.querySelector('.table > tbody')
-		   
-		   
-			while(tbody.firstChild)
-		  	{
-				tbody.removeChild(tbody.firstChild);
-		  	}
-		
-		    mobilePlans.forEach((currentElement,index,arr) =>{
-		     
-			console.log(currentElement);
-			x=currentElement.name;
-			x=x.toUpperCase();
-			if(x==pname)
-			{
+				console.log(currentElement);
 				
-			var th=document.createElement('th');	
-			var tr=document.createElement('tr');
-			var td1=document.createElement('td');
-			td1.innerHTML=currentElement.id;
-			var td2=document.createElement('td');
-			td2.innerHTML=currentElement.name;
-			var td3=document.createElement('td');
-			td3.innerHTML=currentElement.description;
-			var td4=document.createElement('td');
-			td4.innerHTML=currentElement.validity;
-			var td5=document.createElement('td');
-			td5.innerHTML='<button type="button" class="btn btn-outline-danger" onclick=deletebyid('+currentElement.id+')><img class="image-icon" src="images/delete.png"></button></td>';
-			var td6=document.createElement('td');
-			td6.innerHTML="<a href='http://localhost:8080/update.html?id="
-						+ currentElement.id
-						+ "&name="
-						+ currentElement.name
-						+ "&description="
-						+ currentElement.description
-						+ "&validity="
-						+ currentElement.validity
-						+ "'><button class='btn btn-outline-danger' id = " + currentElement.id + " type='button'><img class='image-icon' src='images/edit.png'></button>"
-						
-			tr.appendChild(td1);
-			tr.appendChild(td2);
-			tr.appendChild(td3);
-			tr.appendChild(td4);
-			tr.appendChild(td5);
-			tr.appendChild(td6);
-		    tbody.appendChild(tr);
-		      flag=1;
-			}
-	});
+				var x=currentElement.name;
+				x=x.toUpperCase();
+				
+				var y=currentElement.description;
+				y=y.toUpperCase();
+				
+				var z=currentElement.validity;
+				z=parseInt(z);
+
+				if (checkBox2.checked == true & checkBox3.checked == true & checkBox4.checked == true){
+					var condition=(x==pname & y==pdesc & z==pvalidity);
+				  } else if(checkBox2.checked == true && checkBox3.checked == true && checkBox4.checked == false){
+					var condition=(x==pname & y==pdesc);
+				  }else if(checkBox2.checked == true && checkBox3.checked == false && checkBox4.checked == true){
+					var condition=(x==pname & z==pvalidity);
+				  }else if(checkBox2.checked == true && checkBox3.checked == false && checkBox4.checked == false){
+					var condition=(x==pname);
+				  }else if(checkBox2.checked == false && checkBox3.checked == true && checkBox4.checked == true){
+					var condition=(y==pdesc & z==pvalidity);
+				  }else if(checkBox2.checked == false && checkBox3.checked == true && checkBox4.checked == false){
+					var condition=(y==pdesc);
+				  }else if(checkBox2.checked == false && checkBox3.checked == false && checkBox4.checked == true){
+					var condition=(z==pvalidity);
+				  }else if(checkBox2.checked == false && checkBox3.checked == false && checkBox4.checked == false){
+					//alert("Please select min one search option...!");
+					throw err;
+				  }else{
+					alert("Please select min one search option...!");
+				  }
+
+			
+				//if(x==pname & y==pdesc & z==pvalidity)
+				
+				if(condition)
+				{
+					
+				var th=document.createElement('th');
+				var tr=document.createElement('tr');
+				var td1=document.createElement('td');
+				td1.innerHTML=currentElement.id;
+				var td2=document.createElement('td');
+				td2.innerHTML=currentElement.name;
+				var td3=document.createElement('td');
+				td3.innerHTML=currentElement.description;
+				var td4=document.createElement('td');
+				td4.innerHTML=currentElement.validity;
+				var td5=document.createElement('td');
+				td5.innerHTML='<button type="button" class="btn btn-outline-danger" onclick=deletebyid('+currentElement.id+')><img class="image-icon" src="images/delete.png"></button></td>';
+				var td6=document.createElement('td');
+				td6.innerHTML="<a href='http://localhost:8080/update.html?id="
+							+ currentElement.id
+							+ "&name="
+							+ currentElement.name
+							+ "&description="
+							+ currentElement.description
+							+ "&validity="
+							+ currentElement.validity
+							+ "'><button class='btn btn-outline-danger' id = " + currentElement.id + " type='button'><img class='image-icon' src='images/edit.png'></button>"
+							
+				tr.appendChild(td1);
+				tr.appendChild(td2);
+				tr.appendChild(td3);
+				tr.appendChild(td4);
+				tr.appendChild(td5);
+				tr.appendChild(td6);
+				tbody.appendChild(tr);
+				flag=1;
+				}
+			});
 		 
 		if(flag == 1)
 		        {
-					alert("Data for this plan name fetched");
+					alert("Data fetched");
+					var tableHead=document.getElementById('table-head-view')
+					tableHead.innerHTML='<tr><th scope="col">PLAN ID</th><th scope="col">NAME</th><th scope="col">DESCRIPTION</th><th scope="col">VALIDITY</th><th scope="col">ACTIONS</th><th scope="col">UPDATE</th></tr>';
 				
 				}
 				else
 				{
-					alert("Plan name not present");
+					alert("Plan not present");
 				}
-					
-	}
-			
-			else
-			{
-				alert("Please enter Plan Name");
+
 			}
-			
-			
-			  			
-		 }    
+			catch(err){
+			 	alert("Please select min one search option...!");
+			 }	 	  			
+		 }else
+		 {
+			alert("Enter required fields...");
+		}
+		}    
 	
 	
 	
@@ -187,3 +265,4 @@
 			}
 					
 			*/
+			
