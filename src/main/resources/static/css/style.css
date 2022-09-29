@@ -113,6 +113,9 @@ h6, .h6 {
   /* padding-left: 60px; */
   /* padding-right: 60px; */
 }
+.signup-css{
+	display:grid;
+}
 .btn:hover, .btn:active, .btn:focus {
   outline: 0;
   box-shadow: none !important;
@@ -901,6 +904,10 @@ form{
 .image-icon{
     width:25px;
     height:25px;
+}
+.image-icon1{
+    width:35px;
+    height:35px;
 }
 
 .back-image-front{
