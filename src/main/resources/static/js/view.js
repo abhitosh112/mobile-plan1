@@ -46,7 +46,9 @@
      {
 			
 			console.log("outside");
-
+			
+			//var pid =document.getElementById('planIdView').value;
+			
 			var pname =document.getElementById('name').value;
 			pname=pname.toUpperCase();
 
@@ -55,7 +57,29 @@
 
 			var pvalidity=document.getElementById('validity').value;
   
-			//var pid =document.getElementById('planIdView').value;
+			var outerCondition;
+			
+			if (checkBox2.checked == true && checkBox3.checked == true && checkBox4.checked == true){
+					outerCondition=(pname.length!=0 && pdesc.length!=0 && pvalidity.length!=0);
+				  } else if(checkBox2.checked == true && checkBox3.checked == true && checkBox4.checked == false){
+					outerCondition=(pname.length!=0 && pdesc.length!=0);
+				  }else if(checkBox2.checked == true && checkBox3.checked == false && checkBox4.checked == true){
+					outerCondition=(pname.length!=0 && pvalidity.length!=0);
+				  }else if(checkBox2.checked == true && checkBox3.checked == false && checkBox4.checked == false){
+					outerCondition=(pname.length!=0);
+				  }else if(checkBox2.checked == false && checkBox3.checked == true && checkBox4.checked == true){
+					outerCondition=(pdesc.length!=0 && pvalidity.length!=0);
+				  }else if(checkBox2.checked == false && checkBox3.checked == true && checkBox4.checked == false){
+					outerCondition=(pdesc.length!=0);
+				  }else if(checkBox2.checked == false && checkBox3.checked == false && checkBox4.checked == true){
+					outerCondition=(pvalidity.length!=0);
+				  }else if(checkBox2.checked == false && checkBox3.checked == false && checkBox4.checked == false){
+					outerCondition=false;
+				  }else{
+					outerCondition=false;
+				  }
+
+			
 
 			var xhr = new XMLHttpRequest();
 			xhr.open("GET", "http://localhost:8080/mp", false);
@@ -67,7 +91,9 @@
 			var flag = 0;
 			
 			
-			if(pname.length!=0 || pdesc.length!=0 || pvalidity.length!=0)
+			//if(pname.length!=0 || pdesc.length!=0 || pvalidity.length!=0)
+			console.log(outerCondition);
+			if(outerCondition)
 			{
 				var tbody=document.querySelector('.table > tbody')
 				
@@ -91,16 +117,16 @@
 				var z=currentElement.validity;
 				z=parseInt(z);
 
-				if (checkBox2.checked == true & checkBox3.checked == true & checkBox4.checked == true){
-					var condition=(x==pname & y==pdesc & z==pvalidity);
+				if (checkBox2.checked == true && checkBox3.checked == true && checkBox4.checked == true){
+					var condition=(x==pname && y==pdesc && z==pvalidity);
 				  } else if(checkBox2.checked == true && checkBox3.checked == true && checkBox4.checked == false){
-					var condition=(x==pname & y==pdesc);
+					var condition=(x==pname && y==pdesc);
 				  }else if(checkBox2.checked == true && checkBox3.checked == false && checkBox4.checked == true){
-					var condition=(x==pname & z==pvalidity);
+					var condition=(x==pname && z==pvalidity);
 				  }else if(checkBox2.checked == true && checkBox3.checked == false && checkBox4.checked == false){
 					var condition=(x==pname);
 				  }else if(checkBox2.checked == false && checkBox3.checked == true && checkBox4.checked == true){
-					var condition=(y==pdesc & z==pvalidity);
+					var condition=(y==pdesc && z==pvalidity);
 				  }else if(checkBox2.checked == false && checkBox3.checked == true && checkBox4.checked == false){
 					var condition=(y==pdesc);
 				  }else if(checkBox2.checked == false && checkBox3.checked == false && checkBox4.checked == true){
@@ -114,7 +140,7 @@
 
 			
 				//if(x==pname & y==pdesc & z==pvalidity)
-				
+				console.log(condition);
 				if(condition)
 				{
 					
@@ -152,25 +178,29 @@
 				}
 			});
 		 
-		if(flag == 1)
+				if(flag == 1)
 		        {
-					alert("Data fetched");
 					var tableHead=document.getElementById('table-head-view')
 					tableHead.innerHTML='<tr><th scope="col">PLAN ID</th><th scope="col">NAME</th><th scope="col">DESCRIPTION</th><th scope="col">VALIDITY</th><th scope="col">ACTIONS</th><th scope="col">UPDATE</th></tr>';
-				
+					alert("Data fetched");
 				}
 				else
-				{
+				{	
+					var tableHead=document.getElementById('table-head-view')
+					tableHead.innerHTML='';
 					alert("Plan not present");
+					
 				}
 
 			}
 			catch(err){
 			 	alert("Please select min one search option...!");
 			 }	 	  			
-		 }else
+		 }
+		 else
 		 {
-			alert("Enter required fields...");
+			
+			//alert("Enter required fields...");
 		}
 		}    
 	
