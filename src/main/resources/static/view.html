@@ -104,22 +104,22 @@
               <div class="form-group" style="display:block" id="divPlanName">
                 <label for="inputAddress">NAME</label>
                 <label class="required">*</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter plan name here" required>
+                <input type="text" class="form-control" id="name" placeholder="Enter plan name here" required onkeyup="getBYID()">
               </div>
               <div class="form-group" style="display:none" id="divPlanDesc">
                 <label for="inputAddress2">DESCRIPTION</label>
                 <label class="required">*</label>
-                <input type="text" class="form-control" id="description" placeholder="Enter plan description here" required>
+                <input type="text" class="form-control" id="description" placeholder="Enter plan description here" required onkeyup="getBYID()">
               </div>
   
               <div class="form-group" style="display:none" id="divPlanVal">
                 <label for="inputAddress2">VALIDITY</label>
                 <label class="required">*</label>
-                <input type="number" class="form-control" id="validity" placeholder="Enter no. of days here" required>
+                <input type="number" class="form-control" id="validity" placeholder="Enter no. of days here" required onkeyup="getBYID()">
               </div>
   
               <div class="align-center">
-              <button type="submit" class="btn btn-primary" onclick="getBYID()"style="margin: 30px;">SEARCH</button>
+              <button type="submit" class="btn btn-primary" onclick="searchButton()" style="margin: 30px;">SEARCH</button>
               </div>
             </form>
           </div>
@@ -146,6 +146,8 @@
    
     </tbody>
   </table> 
+ </div>
+ <div id="table-section-noData">
  </div>
 
   </div>

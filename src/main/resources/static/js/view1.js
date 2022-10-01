@@ -8,7 +8,6 @@
 	// 	   div1.style.display = "none";
 	// 	}
 	//   }
-	var flag=0;
 	var checkBox2;
 	var checkBox3;
 	var checkBox4;
@@ -57,7 +56,6 @@
 			pdesc=pdesc.toUpperCase();
 
 			var pvalidity=document.getElementById('validity').value;
-			pvalidity=pvalidity.toString();
   
 			var outerCondition;
 			
@@ -76,7 +74,7 @@
 				  }else if(checkBox2.checked == false && checkBox3.checked == false && checkBox4.checked == true){
 					outerCondition=(pvalidity.length!=0);
 				  }else if(checkBox2.checked == false && checkBox3.checked == false && checkBox4.checked == false){
-					outerCondition=true;
+					outerCondition=false;
 				  }else{
 					outerCondition=false;
 				  }
@@ -90,11 +88,11 @@
 			console.log(xhr.response);
 				
 			var mobilePlans = JSON.parse(mpList);
-			flag = 0;
+			var flag = 0;
 			
 			
 			//if(pname.length!=0 || pdesc.length!=0 || pvalidity.length!=0)
-			
+			console.log(outerCondition);
 			if(outerCondition)
 			{
 				var tbody=document.querySelector('.table > tbody')
@@ -117,22 +115,22 @@
 				y=y.toUpperCase();
 				
 				var z=currentElement.validity;
-				z=z.toString();
+				z=parseInt(z);
 
 				if (checkBox2.checked == true && checkBox3.checked == true && checkBox4.checked == true){
-					var condition=((x.indexOf(pname)>-1) && (y.indexOf(pdesc)>-1) && (z.indexOf(pvalidity)>-1));
+					var condition=(x==pname && y==pdesc && z==pvalidity);
 				  } else if(checkBox2.checked == true && checkBox3.checked == true && checkBox4.checked == false){
-					var condition=((x.indexOf(pname)>-1) && (y.indexOf(pdesc)>-1));
+					var condition=(x==pname && y==pdesc);
 				  }else if(checkBox2.checked == true && checkBox3.checked == false && checkBox4.checked == true){
-					var condition=((x.indexOf(pname)>-1) && (z.indexOf(pvalidity)>-1));
+					var condition=(x==pname && z==pvalidity);
 				  }else if(checkBox2.checked == true && checkBox3.checked == false && checkBox4.checked == false){
-					var condition=((x.indexOf(pname)>-1));
+					var condition=(x==pname);
 				  }else if(checkBox2.checked == false && checkBox3.checked == true && checkBox4.checked == true){
-					var condition=((y.indexOf(pdesc)>-1) && (z.indexOf(pvalidity)>-1));
+					var condition=(y==pdesc && z==pvalidity);
 				  }else if(checkBox2.checked == false && checkBox3.checked == true && checkBox4.checked == false){
-					var condition=((y.indexOf(pdesc)>-1));
+					var condition=(y==pdesc);
 				  }else if(checkBox2.checked == false && checkBox3.checked == false && checkBox4.checked == true){
-					var condition=((z.indexOf(pvalidity)>-1));
+					var condition=(z==pvalidity);
 				  }else if(checkBox2.checked == false && checkBox3.checked == false && checkBox4.checked == false){
 					//alert("Please select min one search option...!");
 					throw err;
@@ -182,38 +180,20 @@
 		 
 				if(flag == 1)
 		        {
-					
-					setTimeout(function(){
-						document.body.style.backgroundColor = "white";
-					},10);
-					document.body.style.backgroundColor = "grey";
 					var tableHead=document.getElementById('table-head-view')
 					tableHead.innerHTML='<tr><th scope="col">PLAN ID</th><th scope="col">NAME</th><th scope="col">DESCRIPTION</th><th scope="col">VALIDITY</th><th scope="col">ACTIONS</th><th scope="col">UPDATE</th></tr>';
-					//alert("Data fetched");
-					var noData=document.getElementById('table-section-noData')
-					noData.innerHTML='';
+					alert("Data fetched");
 				}
 				else
 				{	
-					setTimeout(function(){
-						document.body.style.backgroundColor = "white";
-					},10);
-					document.body.style.backgroundColor = "grey";
 					var tableHead=document.getElementById('table-head-view')
 					tableHead.innerHTML='';
-					var noData=document.getElementById('table-section-noData')
-					noData.innerHTML='<p align="center" style="color:black; align:center; font-weight:bolder">NO DATA PRESENT</p>';
-					
-					
-					
-					//alert("Plan not present");
+					alert("Plan not present");
 					
 				}
 
 			}
 			catch(err){
-				var tableHead=document.getElementById('table-head-view')
-				tableHead.innerHTML='';
 			 	alert("Please select min one search option...!");
 			 }	 	  			
 		 }
@@ -221,21 +201,8 @@
 		 {
 			
 			//alert("Enter required fields...");
-		 }
-	} 
-		
-function searchButton()
-{
-	getBYID();
-	if(flag==1)
-	{
-		alert("data fetched....");
-	}
-	else
-	{
-		alert("failure...!");
-	}
-}   
+		}
+		}    
 	
 	
 	
