@@ -114,7 +114,7 @@
 				var mobilePlans = JSON.parse(mpList);
 				
 				document.getElementById('id').value = mobilePlans.id;
-				document.getElementById('name').value = mobilePlans.Name;
+				document.getElementById('name').value = mobilePlans.name;
 				document.getElementById('description').value = mobilePlans.description;
 				document.getElementById('validity').value = mobilePlans.validity;
 			}
