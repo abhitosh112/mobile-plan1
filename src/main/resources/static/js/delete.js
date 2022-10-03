@@ -25,9 +25,10 @@ swalWithBootstrapButtons.fire({
       'SUCCESS'
     ).then(ok => {
                       if (ok) {
-                           window.location.href = "view all.html";
+                           window.location.href = "";
                               }
-                          });
+                          }
+                          );
   } else if (
     /* Read more about handling dismissals below */
     result.dismiss === Swal.DismissReason.cancel

@@ -62,7 +62,7 @@ public class MobilePlanController {
 		Object mobilePlan= mpSrvc.read(id);
 		if(mobilePlan!=null)
 		{
-			mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.CREATED);
+			mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.OK);
 //			
 			//HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ BY ID",mpResponse.getBody().toString(),date));
 			//restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
