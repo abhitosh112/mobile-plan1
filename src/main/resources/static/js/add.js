@@ -7,7 +7,7 @@
             var description = document.getElementById('description').value;  
             var validity = document.getElementById('validity').value;
             
-            if(validity>=1 && validity<=365){
+            if((validity>=1 && validity<=365) && (/^[A-Za-z][A-Za-z0-9 -]*$/.test(name))){
             
 	            if (name.length !=0 && description.length !=0 && validity.length !=0)  
 	            {  
