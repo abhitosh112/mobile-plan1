@@ -104,7 +104,7 @@
               <div class="form-group" style="display:block" id="divPlanName">
                 <label for="inputAddress">NAME</label>
                 <label class="required">*</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter plan name here" required onkeyup="getBYID()">
+                <input type="text" class="form-control" id="name" placeholder="Enter plan name here" required onkeyup="getBYID()" pattern="^[A-Za-z][A-Za-z0-9 -]*$" title="Plan name must start with character and can contain only - or 0-9">
               </div>
               <div class="form-group" style="display:none" id="divPlanDesc">
                 <label for="inputAddress2">DESCRIPTION</label>
@@ -115,7 +115,7 @@
               <div class="form-group" style="display:none" id="divPlanVal">
                 <label for="inputAddress2">VALIDITY</label>
                 <label class="required">*</label>
-                <input type="number" class="form-control" id="validity" placeholder="Enter no. of days here" required onkeyup="getBYID()">
+                <input type="number" min="1" max="365" class="form-control" id="validity" placeholder="Enter no. of days here" required onkeyup="getBYID()">
               </div>
   
               <div class="align-center">

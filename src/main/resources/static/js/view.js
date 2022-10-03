@@ -95,6 +95,8 @@
 			
 			//if(pname.length!=0 || pdesc.length!=0 || pvalidity.length!=0)
 			
+			if((pvalidity>=1 && pvalidity<=365) || (/^[A-Za-z][A-Za-z0-9 -]*$/.test(pname))){
+			
 			if(outerCondition)
 			{
 				var tbody=document.querySelector('.table > tbody')
@@ -222,6 +224,7 @@
 			
 			//alert("Enter required fields...");
 		 }
+		}
 	} 
 		
 function searchButton()
