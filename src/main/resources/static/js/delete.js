@@ -1,7 +1,44 @@
 function deletebyid(id){
-	if(confirm("Are you sure want to delete ?")){
-		deletebyid1(id);
-	}
+	
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: 'Are you sure?',
+ // text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, cancel!',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+	deletebyid1(id);
+    swalWithBootstrapButtons.fire(
+     // 'Deleted!',
+      'Your Plan has been deleted.',
+      'SUCCESS'
+    ).then(ok => {
+                      if (ok) {
+                           window.location.href = "view all.html";
+                              }
+                          });
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      'Cancelled',
+     // 'Your imaginary file is safe :)',
+      //'error'
+    )
+  }
+})
 }
 function deletebyid1(deleteid)
  {
@@ -27,16 +64,26 @@ function deletebyid1(deleteid)
 	var myjson = JSON.stringify(obj);
 	xhr.send(myjson);
 		
+/*
 	if(xhr.status==200)
 	{
-		alert("Mobile Plan deleted Successfully");
-		location.reload();
+		  Swal.fire(
+      //'Deleted!',
+      'Your Plan has been deleted.',
+      'success'
+    ).then(ok => {
+                      if (ok) {
+                           window.location.href = "view all.html";
+                              }
+                          });
+		//swal.fire("Mobile Plan deleted Successfully");
+		//location.reload();
 	}
 	else
 	{
-		alert("Mobile Plan not present to delete");	
+		swal.fire("Mobile Plan not present to delete");	
 	}	
-
+*/
 console.log("outside")
 
 }
