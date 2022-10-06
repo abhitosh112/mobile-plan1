@@ -43,7 +43,6 @@
 		   div4.style.display = "none";
 		}
 	  }
-	  
 	
 	function getBYID()
      {
@@ -150,10 +149,9 @@
 					throw err;
 				  }else{
 					alert("Please select min one search option...!");
+					
 				  }
 
-			
-				//if(x==pname & y==pdesc & z==pvalidity)
 				console.log(condition);
 				if(condition)
 				{
@@ -201,9 +199,9 @@
 					document.body.style.backgroundColor = "grey";
 					var tableHead=document.getElementById('table-head-view')
 					tableHead.innerHTML='<tr><th scope="col">PLAN ID</th><th scope="col">NAME</th><th scope="col">DESCRIPTION</th><th scope="col">VALIDITY</th><th scope="col">ACTIONS</th><th scope="col">UPDATE</th></tr>';
-					//alert("Data fetched");
 					var noData=document.getElementById('table-section-noData')
 					noData.innerHTML='';
+					//swalWithBootstrapButtons.fire('Success!','Mobile plans searched.','success')
 				}
 				else
 				{	
@@ -213,23 +211,22 @@
 					document.body.style.backgroundColor = "grey";
 					var tableHead=document.getElementById('table-head-view')
 					tableHead.innerHTML='';
+					
 					var noData=document.getElementById('table-section-noData')
 					noData.innerHTML='<p align="center" style="color:black; align:center; font-weight:bolder">NO DATA PRESENT</p>';
+					//swalWithBootstrapButtons.fire('Oops!','Plan not present.','error');
 
-					//alert("Plan not present");	
 				}
 
 			}
 			catch(err){
 				var tableHead=document.getElementById('table-head-view')
 				tableHead.innerHTML='';
-			 	alert("Please select min one search option...!");
-			 	//swalWithBootstrapButtons.fire('Oops!','Please select min one search option...!','success');
+			 	swalWithBootstrapButtons.fire('Oops!','Please select min one search option...!','warning');
 			 }	 	  			
 		 }
 		 else
 		 {
-			
 			//alert("Enter required fields...");
 		 }
 		}
@@ -237,7 +234,8 @@
 		
 function searchButton()
 {
-		const swalWithBootstrapButtons = Swal.mixin({
+	getBYID();
+	const swalWithBootstrapButtons = Swal.mixin({
 		customClass: {
 		  confirmButton: 'btn btn-success',
 		  cancelButton: 'btn btn-danger'
@@ -245,19 +243,37 @@ function searchButton()
 		  buttonsStyling: false,
 		  allowOutsideClick:false
 	  });
-	getBYID();
 	if(flag==1)
 	{
 		swalWithBootstrapButtons.fire('Success!','Mobile plans searched.','success')
 	}
 	else
 	{
-		var tableHead=document.getElementById('myTable')
+		var tableHead=document.getElementById('table-head-view')
 		tableHead.innerHTML='';
-		swalWithBootstrapButtons.fire('Oops!','Plan not present.','error');
-		//alert("failure...!");
+		var tableBody=document.getElementById('table-body')
+		tableBody.innerHTML='';
+		var noData=document.getElementById('table-section-noData')
+		//noData.innerHTML='<p align="center" style="color:black; align:center; font-weight:bolder">NO DATA PRESENT</p>';
+		
+		var pname =document.getElementById('name').value;
+		var pdescription =document.getElementById('description').value;
+		var pvalidity=document.getElementById('validity').value;
+		
+
+		if(((checkBox4.checked == true) && (pvalidity<1 || pvalidity>365)) || 
+		(checkBox2.checked == true) && (!(/^[A-Za-z][A-Za-z0-9 -]*$/.test(pname))) ||
+		(checkBox3.checked == true) && (pdescription.length==0)){
+		}
+		else if(checkBox2.checked == false && checkBox3.checked == false && checkBox4.checked == false){
+			swalWithBootstrapButtons.fire('Oops!','Please select min one search option...!','warning');
+		}
+		else{
+			swalWithBootstrapButtons.fire('Oops!','Plan not present.','error');
+		}
 	}
-}   
+	
+}  
 	
 	
 	
