@@ -1,3 +1,7 @@
+var nameOld; 
+var descriptionOld;  
+var validityOld;
+		
 		function setValue()
 		{
 			var url_string = window.location;
@@ -10,16 +14,22 @@
 			document.getElementById('name').value = name;
 			document.getElementById('description').value = description;
 			document.getElementById('validity').value = validity;
+			
+			nameOld=name;
+			descriptionOld=description;
+			validityOld=validity;
+			
 		}
 
 		function UpdateRecord()
 		{
             var name = document.getElementById('name').value;   
             var validity = document.getElementById('validity').value;
+			var description = document.getElementById('description').value; 
 
 			if((validity>=1 && validity<=365) && (/^[A-Za-z][A-Za-z0-9 -]*$/.test(name)))
 			{
-				UpdateRecord1();
+				UpdateRecord1();	
 			}
 			
 		}
