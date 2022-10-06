@@ -74,7 +74,7 @@
                 <div class="form-group" style="display:block" id="divPlanID">
                   <label for="inputAddress">PLAN ID</label>
                   <label class="required">*</label>
-                  <input type="number" class="form-control" id="id" placeholder="Enter plan id here" required>
+                  <input type="number" class="form-control" id="id" placeholder="Enter plan id here" required onkeyup="getBYID('autoKey')">
                    <!-- onkeyup="getBYID()"> -->
                 </div>
     
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="align-center" style="display:grid" id="divPlanSearch">
-                  <button type="button" class="btn btn-primary" onclick="getBYID()" style="margin: 30px;">Search</button>
+                  <button type="button" class="btn btn-primary" onclick="getBYID('button')" style="margin: 30px;">Search</button>
                 </div>
     
                 <div class="align-center" style="display:none" id="divPlanSubmit">

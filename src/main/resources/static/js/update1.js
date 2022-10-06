@@ -115,7 +115,7 @@ function UpdateRecord2()
 //------------------------------------------------------------------------------------------------->
 
 
-function getBYID()
+function getBYID(mode)
  {
     console.log("outside");
     var userid =document.getElementById('id').value;
@@ -152,17 +152,21 @@ function getBYID()
             document.getElementById("divPlanDesc").style.display = "none";
             document.getElementById("divPlanVal").style.display = "none";
             document.getElementById("divPlanSubmit").style.display = "none";
+            document.getElementById("divPlanSearch").style.display = "grid";
             //alert(xhr.response);
 
 
             
-
-              swalWithBootstrapButtons.fire('Oops!','Data for this id not present','ERROR').then(ok => 
+            if(mode=='button'){
+              swalWithBootstrapButtons.fire('Oops!','ID not present to update','ERROR').then(ok => 
                 {
                 if (ok) {
                      window.location.reload();
                         }
                 });
+
+            }
+              
         }
         else
         {
@@ -202,7 +206,7 @@ function getBYID()
         var mobilePlans = JSON.parse(mpList);
         
         document.getElementById('id').value = mobilePlans.id;
-        document.getElementById("id").readOnly=true;
+        //document.getElementById("id").readOnly=true;
         document.getElementById('name').value = mobilePlans.name;
         document.getElementById('description').value = mobilePlans.description;
         document.getElementById('validity').value = mobilePlans.validity;
