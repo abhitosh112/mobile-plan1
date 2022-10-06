@@ -43,16 +43,9 @@
 		   div4.style.display = "none";
 		}
 	  }
-
-	  function getBYID()
-	  {
-		if((pvalidity>=1 && pvalidity<=365) || (/^[A-Za-z][A-Za-z0-9 -]*$/.test(pname))){
-			getBYID1();
-		}
-	  }
 	  
 	
-	function getBYID1()
+	function getBYID()
      {
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {
