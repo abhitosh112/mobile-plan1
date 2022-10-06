@@ -15,7 +15,16 @@ function loginCheck()
         }
         else
         {
-            alert("Plz enter correct username and password...!");
+			const swalWithBootstrapButtons = Swal.mixin({
+		        customClass: {
+		          confirmButton: 'btn btn-success',
+		          cancelButton: 'btn btn-danger'
+		            },
+		          buttonsStyling: false,
+		          allowOutsideClick:false
+		      });
+            swalWithBootstrapButtons.fire('Oops!','Username and password are not correct','error');
+            
         }
     }
 }
