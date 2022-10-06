@@ -78,3 +78,38 @@
 	});
 
 })(jQuery);
+
+function logoutConfirmation()
+{
+	const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+		  confirmButton: 'btn btn-success',
+		  cancelButton: 'btn btn-danger'
+		},
+		buttonsStyling: false,
+		allowOutsideClick:false
+	  })
+
+	swalWithBootstrapButtons.fire({
+		title: 'Are you sure?',
+	   // text: "You won't be able to revert this!",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Yes, Logout!',
+		cancelButtonText: 'No, cancel!',
+		reverseButtons: true
+	  }).then((result) => {
+		if (result.isConfirmed) {
+		  swalWithBootstrapButtons.fire(
+			'Logged Out!',
+			'You are logged out.',
+			'SUCCESS'
+		  ).then(ok => {
+							if (ok) {
+								 window.location.href = "index.html";
+									}
+								}
+								);
+		}
+	})
+}
