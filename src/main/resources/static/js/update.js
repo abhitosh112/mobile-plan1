@@ -14,6 +14,19 @@
 
 		function UpdateRecord()
 		{
+            var name = document.getElementById('name').value;   
+            var validity = document.getElementById('validity').value;
+
+			if((validity>=1 && validity<=365) && (/^[A-Za-z][A-Za-z0-9 -]*$/.test(name)))
+			{
+				UpdateRecord1();
+			}
+			
+		}
+		
+
+		function UpdateRecord1()
+		{
 			//swal alert
 			const swalWithBootstrapButtons = Swal.mixin({
 				customClass: {
@@ -33,21 +46,17 @@
 				reverseButtons: true
 			}).then((result) => {
 				if (result.isConfirmed) {
-					UpdateRecord1();
+					UpdateRecord2();
 				} else if (
 				/* Read more about handling dismissals below */
-				result.dismiss === Swal.DismissReason.cancel
-				) {
-				swalWithBootstrapButtons.fire(
-					'Cancelled',
-				// 'Your imaginary file is safe :)',
-					//'error'
-				)
+				result.dismiss === Swal.DismissReason.cancel) {
+				swalWithBootstrapButtons.fire('Cancelled',// 'Your imaginary file is safe :)',//'error'
+				);
 				}
 			})
 		}
 		
-		function UpdateRecord1()
+		function UpdateRecord2()
         { 
 			//swal alert
 			const swalWithBootstrapButtons = Swal.mixin({
