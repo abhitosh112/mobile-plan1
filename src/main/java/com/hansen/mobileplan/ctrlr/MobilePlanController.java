@@ -1,10 +1,12 @@
 package com.hansen.mobileplan.ctrlr;
 import java.util.Date;
+
 import java.util.Iterator;
 import org.springframework.web.client.RestTemplate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,11 @@ import com.hansen.mobileplan.dao.MobilePlanDao;
 import com.hansen.mobileplan.model.MobilePlan;
 import com.hansen.mobileplan.srvc.MobilePlanSrvc;
 import com.hansen.mobileplan.model.Auditlog;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 @RestController
 @RequestMapping("/mp")
@@ -44,7 +51,7 @@ public class MobilePlanController {
 			mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.CREATED);
 			
 			// audit log using RestTemplate
-			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("CREATED",mpResponse.getBody().toString(),date =new Date()));
+			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("CREATED",mpResponse.getBody().toString(),date=new Date()));
 			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 			
 		} else {
@@ -64,7 +71,7 @@ public class MobilePlanController {
 		{
 			mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.OK);
 //			
-			//HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ BY ID",mpResponse.getBody().toString(),date =new Date()));
+			//HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ BY ID",mpResponse.getBody().toString(),date));
 			//restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 			
 		}
@@ -91,7 +98,7 @@ public class MobilePlanController {
         {
             mpResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
 //            
-            //HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ ALL",mpResponse.getBody().toString().substring(0, 100),date =new Date()));
+            //HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("READ ALL",mpResponse.getBody().toString().substring(0, 100),date=new Date()));
 			//restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
            
         }
@@ -112,20 +119,21 @@ public class MobilePlanController {
 		
 		//TODO Homework... write the code to update
 		
-		Object mobilePlanList = mpSrvc.update(tobemerged);
-				
-		if(mobilePlanList!= null) {
-			planResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
-			
-			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("UPDATED",planResponse.getBody().toString(),date =new Date()));
-			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
-		}
-		else {
-			planResponse = new ResponseEntity<Object>("ID Not Present for update", null, HttpStatus.NOT_FOUND);	
-		}
-		return planResponse;
+		return updateWhat(tobemerged);
+//		Object mobilePlanList = mpSrvc.update(tobemerged);
+//		
+//				
+//		if(mobilePlanList!= null) {
+//			planResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
+//			
+//			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("UPDATED",planResponse.getBody().toString(),date=new Date()));
+//			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+//		}
+//		else {
+//			planResponse = new ResponseEntity<Object>("ID Not Present for update", null, HttpStatus.NOT_FOUND);	
+//		}
+//		return planResponse;
 	}
-		
 
 	@RequestMapping(value = "{planid}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@PathVariable(value = "planid") Long planid) {
@@ -139,7 +147,7 @@ public class MobilePlanController {
 		if(mobilePlan) {
 			bookResponse = new ResponseEntity<Object>("Mobile plan deleted", null , HttpStatus.OK);
 			
-			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("DELETED",mp.toString(),date =new Date()));
+			HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("DELETED",mp.toString(),date=new Date()));
 			restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
 		}
 		else{
@@ -149,6 +157,86 @@ public class MobilePlanController {
 		return bookResponse;
 	  
 		
+	}
+	
+	public ResponseEntity<Object> updateWhat(MobilePlan tobemerged) {
+		ResponseEntity<Object> planResponse = null;
+		//extra part
+				Object mobilePlan= mpSrvc.read(tobemerged.getId());
+				Object mpResponse=null;
+				if(mobilePlan!=null)
+				{
+					mpResponse = new ResponseEntity<Object>(mobilePlan, null, HttpStatus.OK);
+				}
+				else
+				{
+					mpResponse = new ResponseEntity<Object>("ID not present", null, HttpStatus.NOT_FOUND);
+				}
+				
+				String x=((HttpEntity<Object>) mpResponse).getBody().toString();
+				// //extra part
+				
+				JSONParser parser = new JSONParser();
+				JSONObject coderollsJSONObject = new JSONObject();
+				try {
+					coderollsJSONObject = (JSONObject) parser.parse(x);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				
+				String nameRead = (String) coderollsJSONObject.get("name");
+				String descriptionRead = (String) coderollsJSONObject.get("description");
+				Long validityRead =(Long) coderollsJSONObject.get("validity");
+				
+				 Object mobilePlanList = mpSrvc.update(tobemerged);
+					
+					if(mobilePlanList!= null) {
+						planResponse = new ResponseEntity<Object>(mobilePlanList, null, HttpStatus.CREATED);
+						
+						try {
+							coderollsJSONObject = (JSONObject) parser.parse(planResponse.getBody().toString());
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+						
+						String nameRead1 = (String) coderollsJSONObject.get("name");
+						String descriptionRead1 = (String) coderollsJSONObject.get("description");
+						Long validityRead1 = (Long) coderollsJSONObject.get("validity");
+						
+						int flag=0;
+						String databaseString="id : "+tobemerged.getId();
+						if(!nameRead.equals(nameRead1))
+						{
+							flag=1;
+							databaseString+="<br>name : " +nameRead+ " --> "+nameRead1;
+						}
+						if(!descriptionRead.equals(descriptionRead1))
+						{
+							flag=1;
+							databaseString+="<br>Description : " +descriptionRead+ " --> " +descriptionRead1;
+						}
+						if(validityRead!=validityRead1)
+						{
+							flag=1;
+							databaseString+="<br>Validity : " +validityRead+ "--> "+validityRead1;
+						}
+						if(flag!=0)
+						{
+							HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("UPDATED",(databaseString),date=new Date()));
+							//HttpEntity<Auditlog> request = new HttpEntity<Auditlog>(new Auditlog("UPDATED",x+"\n"+(planResponse.getBody().toString()),date=new Date()));
+							restTemplate.postForObject("http://localhost:8081/audit", request, Auditlog.class);
+							
+						}
+						else
+						{
+							planResponse = new ResponseEntity<Object>("NO change", null, HttpStatus.NOT_FOUND);
+						}	
+				
+					}
+					else {
+						planResponse = new ResponseEntity<Object>("ID Not Present for update", null, HttpStatus.NOT_FOUND);	
+					}
+					return planResponse;
 	}
 
 }
