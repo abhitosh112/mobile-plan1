@@ -252,6 +252,8 @@ function searchButton()
 	}
 	else
 	{
+		var tableHead=document.getElementById('myTable')
+		tableHead.innerHTML='';
 		swalWithBootstrapButtons.fire('Oops!','Plan not present.','error');
 		//alert("failure...!");
 	}
