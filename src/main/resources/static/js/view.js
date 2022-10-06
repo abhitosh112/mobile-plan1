@@ -8,6 +8,7 @@
 	// 	   div1.style.display = "none";
 	// 	}
 	//   }
+	  
 	var flag=0;
 	var checkBox2;
 	var checkBox3;
@@ -45,6 +46,14 @@
 	
 	function getBYID()
      {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+			  confirmButton: 'btn btn-success',
+			  cancelButton: 'btn btn-danger'
+				},
+			  buttonsStyling: false,
+			  allowOutsideClick:false
+		  });
 			
 			console.log("outside");
 			
@@ -95,7 +104,7 @@
 			
 			//if(pname.length!=0 || pdesc.length!=0 || pvalidity.length!=0)
 			
-			if((pvalidity>=1 && pvalidity<=365) || (/^[A-Za-z][A-Za-z0-9 -]*$/.test(pname))){
+			//if((pvalidity>=1 && pvalidity<=365) || (/^[A-Za-z][A-Za-z0-9 -]*$/.test(pname))){
 			
 			if(outerCondition)
 			{
@@ -205,11 +214,8 @@
 					tableHead.innerHTML='';
 					var noData=document.getElementById('table-section-noData')
 					noData.innerHTML='<p align="center" style="color:black; align:center; font-weight:bolder">NO DATA PRESENT</p>';
-					
-					
-					
-					//alert("Plan not present");
-					
+
+					//alert("Plan not present");	
 				}
 
 			}
@@ -217,6 +223,7 @@
 				var tableHead=document.getElementById('table-head-view')
 				tableHead.innerHTML='';
 			 	alert("Please select min one search option...!");
+			 	//swalWithBootstrapButtons.fire('Oops!','Please select min one search option...!','success');
 			 }	 	  			
 		 }
 		 else
@@ -225,18 +232,27 @@
 			//alert("Enter required fields...");
 		 }
 		}
-	} 
+	//} 
 		
 function searchButton()
 {
+		const swalWithBootstrapButtons = Swal.mixin({
+		customClass: {
+		  confirmButton: 'btn btn-success',
+		  cancelButton: 'btn btn-danger'
+			},
+		  buttonsStyling: false,
+		  allowOutsideClick:false
+	  });
 	getBYID();
 	if(flag==1)
 	{
-		alert("data fetched....");
+		swalWithBootstrapButtons.fire('Success!','Mobile plans searched.','success')
 	}
 	else
 	{
-		alert("failure...!");
+		swalWithBootstrapButtons.fire('Oops!','Plan not present.','error');
+		//alert("failure...!");
 	}
 }   
 	

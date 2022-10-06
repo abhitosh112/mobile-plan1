@@ -11,9 +11,54 @@
 			document.getElementById('description').value = description;
 			document.getElementById('validity').value = validity;
 		}
-		
+
 		function UpdateRecord()
-        {  
+		{
+			//swal alert
+			const swalWithBootstrapButtons = Swal.mixin({
+				customClass: {
+				confirmButton: 'btn btn-success',
+				cancelButton: 'btn btn-danger'
+					},
+				buttonsStyling: false,
+				allowOutsideClick:false
+			});
+			swalWithBootstrapButtons.fire({
+				title: 'Are you sure?',
+			// text: "You won't be able to revert this!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'Yes, Update it!',
+				cancelButtonText: 'No, cancel!',
+				reverseButtons: true
+			}).then((result) => {
+				if (result.isConfirmed) {
+					UpdateRecord1();
+				} else if (
+				/* Read more about handling dismissals below */
+				result.dismiss === Swal.DismissReason.cancel
+				) {
+				swalWithBootstrapButtons.fire(
+					'Cancelled',
+				// 'Your imaginary file is safe :)',
+					//'error'
+				)
+				}
+			})
+		}
+		
+		function UpdateRecord1()
+        { 
+			//swal alert
+			const swalWithBootstrapButtons = Swal.mixin({
+				customClass: {
+				  confirmButton: 'btn btn-success',
+				  cancelButton: 'btn btn-danger'
+					},
+				  buttonsStyling: false,
+				  allowOutsideClick:false
+			  });
+
             var id = document.getElementById('id').value;  
             var name = document.getElementById('name').value;  
             var description = document.getElementById('description').value;  
@@ -45,12 +90,20 @@
 					xhr.send(myjson);
 					if(xhr.status==404)
 	               	{
-		            	alert("Mobileplan id not present to update");
+		            	//alert("Mobileplan id not present to update");
 	                }
 	                else
 					{
-						alert("Mobileplan updated Successfully");
-						location.replace("view all.html");
+						//alert("Mobileplan updated Successfully..1");
+
+						swalWithBootstrapButtons.fire('Updated!','Your Plan has been updated.','SUCCESS').then(ok => 
+							{
+							if (ok) {
+								 window.location.replace("view all.html");
+									}
+							});
+						
+						//location.replace("view all.html");
 					}  
 	            }
 	         }   

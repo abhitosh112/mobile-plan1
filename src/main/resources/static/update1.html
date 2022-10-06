@@ -69,12 +69,13 @@
 
             <div class="col-lg-7 text-center text-lg-left">
               <div class="form-width">
-              <form>
+              <form onsubmit="return false">
 
-                <div class="form-group">
+                <div class="form-group" style="display:block" id="divPlanID">
                   <label for="inputAddress">PLAN ID</label>
                   <label class="required">*</label>
-                  <input type="number" class="form-control" id="id" placeholder="Enter plan id here" required onkeyup="getBYID()">
+                  <input type="number" class="form-control" id="id" placeholder="Enter plan id here" required>
+                   <!-- onkeyup="getBYID()"> -->
                 </div>
     
                 <div class="form-group" style="display:none" id="divPlanName">
@@ -93,9 +94,13 @@
                   <label class="required">*</label>
                   <input type="number" min="1" max="365" class="form-control" id="validity" placeholder="Enter no. of days here" required title="Validity must be 1-365">
                 </div>
+
+                <div class="align-center" style="display:grid" id="divPlanSearch">
+                  <button type="button" class="btn btn-primary" onclick="getBYID()" style="margin: 30px;">Search</button>
+                </div>
     
-                <div class="align-center">
-                <button type="submit" class="btn btn-primary" onclick="UpdateRecord()" style="margin: 30px;">UPDATE MOBILEPLAN</button>
+                <div class="align-center" style="display:none" id="divPlanSubmit">
+                  <button type="submit" class="btn btn-primary" onclick="UpdateRecord()" style="margin: 30px;">UPDATE MOBILEPLAN</button>
                 </div>
               </form>
               </div>
@@ -134,10 +139,12 @@
 <script src="plugins/clipboard/clipboard.min.js"></script>
 <script src="plugins/match-height/jquery.matchHeight-min.js"></script>
 <script src="js/edit.js"></script>
-<script src="js/update.js"></script>
+<script src="js/update1.js"></script>
 
 <!-- Main Script -->
 <script src="js/script.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>

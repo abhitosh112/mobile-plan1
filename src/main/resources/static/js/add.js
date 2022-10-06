@@ -1,7 +1,14 @@
-
-
-      function createplan()  
+ function createplan()  
         {  
+	
+			const swalWithBootstrapButtons = Swal.mixin({
+		  	customClass: {
+				confirmButton: 'btn btn-success',
+				cancelButton: 'btn btn-danger'
+		  		},
+				buttonsStyling: false,
+				allowOutsideClick:false
+			});
             //var id = document.getElementById('id').value;  
             var name = document.getElementById('name').value;  
             var description = document.getElementById('description').value;  
@@ -32,11 +39,18 @@
 					
 					if(xhr.status==201)
 					{
-						alert("Mobile Plan Added Successfully");
+						//alert("Mobile Plan Added Successfully");
 						//swal("Success!", "Mobile Plan created successfully!", "success");
+						swalWithBootstrapButtons.fire('Added!','Your Plan has been created.','SUCCESS').then(ok => 
+							{
+							if (ok) {
+								 window.location.reload();
+									}
+							});
 					}
 					else{
-						alert("Something went wrong");
+						//alert("Something went wrong");
+						swalWithBootstrapButtons.fire('Oops!','Something went wrong.','ERROR');
 					}
 				}		
 			}

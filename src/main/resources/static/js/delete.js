@@ -5,7 +5,8 @@ const swalWithBootstrapButtons = Swal.mixin({
     confirmButton: 'btn btn-success',
     cancelButton: 'btn btn-danger'
   },
-  buttonsStyling: false
+  buttonsStyling: false,
+  allowOutsideClick:false
 })
 
 swalWithBootstrapButtons.fire({
@@ -20,7 +21,7 @@ swalWithBootstrapButtons.fire({
   if (result.isConfirmed) {
 	deletebyid1(id);
     swalWithBootstrapButtons.fire(
-     // 'Deleted!',
+      'Deleted!',
       'Your Plan has been deleted.',
       'SUCCESS'
     ).then(ok => {
@@ -64,6 +65,7 @@ function deletebyid1(deleteid)
 	  
 	var myjson = JSON.stringify(obj);
 	xhr.send(myjson);
+}
 		
 /*
 	if(xhr.status==200)
@@ -85,9 +87,9 @@ function deletebyid1(deleteid)
 		swal.fire("Mobile Plan not present to delete");	
 	}	
 */
-console.log("outside")
+//console.log("outside")
 
-}
+//}
 		/*
 			if(xhr.status==406)
 			{
