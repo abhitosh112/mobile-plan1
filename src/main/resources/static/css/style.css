@@ -81,20 +81,30 @@ h5, .h5 {
 h6, .h6 {
   font-size: 18px;
 }
+html{
+	 height: 100vh; 
+	 min-height:100%;
+	max-height:100%;
+	 
+}
+body{
+	height:100vh;
+	min-height:100%;
+	max-height:100%;
+}
 
 /* Button style */
 .btn {
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
   text-transform: capitalize;
-  padding: 7px 15px;
+  padding: 2px 15px;
   border-radius: 6px;
   border: 1px solid;
   position: relative;
   z-index: 1;
   transition: 0.2s ease;
   font-weight: 600;
-  
 }
 /* .btn_icon {
   font-size: 16px;
@@ -222,8 +232,14 @@ a:hover {
   padding-bottom: 80px;
 }
 .section-sm {
-  padding-top: 50px;
-  padding-bottom: 50px;
+	min-height:76vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.section-sm1 {
+	min-height:85vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 .section-title {
   margin-bottom: 40px;
@@ -789,9 +805,21 @@ form{
 .content th {
   font-weight: 500;
 }
+td
+{
+	vertical-align: middle;
+	font-size:14px
+}
+th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
 .content thead {
   background: #FBFBFB;
   margin-bottom: 0;
+  position:fixed;
 }
 .content thead tr {
   border-bottom: 1px solid #EEEEEE;
@@ -897,13 +925,13 @@ form{
 .padd-image{
   padding:22px;
 }
-
+	
 .table-border{
   border-color: #000;
 }
 .image-icon{
-    width:25px;
-    height:25px;
+    width:20px;
+    height:20px;
 }
 .image-icon1{
     width:35px;
